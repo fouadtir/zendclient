@@ -1,0 +1,32 @@
+<?php
+echo $this->form;
+echo '<div id=resultat></div>';
+ ?>
+ <script type="text/javascript">
+     $(document).ready(function () {
+         $("#valider").click(function (e) {
+             e.preventDefault();
+             $.post(
+                 'http://zendclient.local/ajout-client',
+                 {
+                     numeroClient:$("#numeroClient").val(),
+                     nom: $("#nom").val(),
+                     prenom: $("#prenom").val(),
+                     email: $("#email").val(),
+                     dateNaissance: $("#dateNaissance").val()
+                 },
+                 function(data){
+                     if(data == 'success')
+                     {
+                         $("#resultat").html("<p>Succès !</p>");
+                     }
+                     else{
+                         $("#resultat").html("<p>Erreur.</p>");
+                     }
+                 },
+                 'json'
+             );
+         });
+
+    });
+ </script>
